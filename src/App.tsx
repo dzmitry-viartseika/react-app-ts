@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TheButton, Ptag } from "./components/";
+import {TheButton, Ptag, Rating} from "./components/";
 
 function App(): JSX.Element {
     const [counter, setCounter] = useState<number>(0);
@@ -8,8 +8,14 @@ function App(): JSX.Element {
         setCounter(counter + 1);
     };
 
+    const setRating = () => {
+        console.log('setRating');
+    };
+
     useEffect(() => {
+        console.log('useEffect');
     }, [counter]);
+
   return (
     <div className={'App'}>
         counter={ counter }
@@ -29,6 +35,8 @@ function App(): JSX.Element {
             children={`wertey hello how are u?`}
             size={`lg`}
         />
+
+        <Rating  setRating={setRating} rating={3}/>
     </div>
   );
 }
