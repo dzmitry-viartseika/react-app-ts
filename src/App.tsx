@@ -36,7 +36,11 @@ function App(): JSX.Element {
             size={`lg`}
         />
 
-        <Rating  setRating={setRating} rating={3}/>
+        <Rating
+            setRating={setRating}
+            rating={3}
+            isEditable={true}
+        />
     </div>
   );
 }

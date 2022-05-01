@@ -1,7 +1,8 @@
 import { RatingProps } from './Rating.props';
 import styles from './Rating.module.scss';
 import cn from 'classnames';
-import {useEffect, useState} from "react";
+import {useEffect, useState, KeyboardEvent} from "react";
+import {set} from "react-hook-form";
 
 export const Rating = (
     {
@@ -12,22 +13,46 @@ export const Rating = (
     }: RatingProps
 ) => {
 
-    const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill([]));
+    const [ratingArray, setRatingArray] = useState<number[]>([1,2,3,4,5]);
+    const [arrayLength, setArrayLength] = useState<number>(1);
 
-    // useEffect(() => {
-    //     constractRating(rating);
-    // }, [rating]);
+    const handleClick = (index: number) => {
+        setArrayLength(index);
+    };
+
+    useEffect(() => {
+        setArrayLength(rating);
+    }, []);
+
+    const changeDisplayRating = (index: number) => {
+        if (!isEditable) return; //;
+        setArrayLength(index);
+    };
+
+    const handleSpace = (index: number, e: KeyboardEvent<SVGAElement>) => {
+        if (e.code !== 'Space') {
+            return; //
+        }
+        setArrayLength(index);
+    };
 
     return (
-        <div {...props}>
+        <div className={`rating`} {...props}>
             {ratingArray.map((r, index) => (
-                <div>
+                <div
+                    className={`rating__item`}
+                    key={r}
+                    onMouseEnter={() => changeDisplayRating(index + 1)}
+                    onMouseLeave={() => changeDisplayRating(rating)}
+                    tabIndex={isEditable ? 0 : -1}
+                    onKeyDown={(e: KeyboardEvent<SVGAElement>) => isEditable && handleSpace(index + 1, e)}
+                >
                     <svg
-                        className={cn(styles.star, 'bi bi-star', {
-                            [styles.fill]: index < rating
+                        onClick={() => handleClick(index + 1)}
+                        className={cn(styles.star, 'bi bi-star rating__icon', {
+                            [styles.fill]: r <= arrayLength
                         })
                         }
-                        key={index}
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         viewBox="0 0 16 16">
                         <path
