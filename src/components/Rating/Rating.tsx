@@ -1,8 +1,7 @@
 import { RatingProps } from './Rating.props';
 import styles from './Rating.module.scss';
 import cn from 'classnames';
-import {useEffect, useState, KeyboardEvent} from "react";
-import {set} from "react-hook-form";
+import { useEffect, useState, KeyboardEvent } from "react";
 
 export const Rating = (
     {
@@ -11,7 +10,7 @@ export const Rating = (
         setRating,
         ...props
     }: RatingProps
-) => {
+): JSX.Element => {
 
     const [ratingArray, setRatingArray] = useState<number[]>([1,2,3,4,5]);
     const [arrayLength, setArrayLength] = useState<number>(1);

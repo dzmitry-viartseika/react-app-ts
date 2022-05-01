@@ -16,7 +16,7 @@ export const Ptag = (
         className,
         ...props
     }: PtagProps
-) => {
+): JSX.Element => {
     return (
         <p className={cn(styles.paragraph, className, {
                 [styles.md]: size === TextSize.MD,
