@@ -1,10 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import {TheButton, Ptag, Rating} from "./components/";
 import { withLayout } from './layout/Layout';
+import { sortReducer } from "./context/reducer/sort.reducer";
 
+enum SortEnum {
+    Price,
+    Rating,
+}
 
 function App(): JSX.Element {
     const [counter, setCounter] = useState<number>(0);
+    const [{products: sortedProducts}, dispatchSort] = useReducer(sortReducer, {products, sort: SortEnum.Rating});
+
+    const setSort = (sort: SortEnum) => {
+        dispatchSort({type: sort});
+    };
 
     const handleClick = () => {
         setCounter(counter + 1);
