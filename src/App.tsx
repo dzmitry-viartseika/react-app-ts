@@ -2,6 +2,7 @@ import React, {useState, useEffect, useReducer} from 'react';
 import {TheButton, Ptag, Rating} from "./components/";
 import { withLayout } from './layout/Layout';
 import { sortReducer } from "./context/reducer/sort.reducer";
+import {useScrollY} from "./hooks/useScrollY";
 
 enum SortEnum {
     Price,
@@ -10,11 +11,12 @@ enum SortEnum {
 
 function App(): JSX.Element {
     const [counter, setCounter] = useState<number>(0);
-    const [{products: sortedProducts}, dispatchSort] = useReducer(sortReducer, {products, sort: SortEnum.Rating});
+    const y = useScrollY();
+    // const [{products: sortedProducts}, dispatchSort] = useReducer(sortReducer, {products, sort: SortEnum.Rating});
 
-    const setSort = (sort: SortEnum) => {
-        dispatchSort({type: sort});
-    };
+    // const setSort = (sort: SortEnum) => {
+    //     dispatchSort({type: sort});
+    // };
 
     const handleClick = () => {
         setCounter(counter + 1);
@@ -30,7 +32,6 @@ function App(): JSX.Element {
 
   return (
     <div className={'App'}>
-              counter={ counter }
               <TheButton
                   children={`primary`}
                   appearance={`primary`}
@@ -53,8 +54,10 @@ function App(): JSX.Element {
                   rating={3}
                   isEditable={true}
               />
+        y={y}
           </div>
   );
 }
 
-export default withLayout(App);
+export default App;
+// export default withLayout(App);
