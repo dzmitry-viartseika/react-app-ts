@@ -12,7 +12,7 @@ export const Rating = (
     }: RatingProps
 ): JSX.Element => {
 
-    const [ratingArray, setRatingArray] = useState<number[]>([1,2,3,4,5]);
+    const [ratingArray, setRatingArray] = useState<number[]>([]);
     const [arrayLength, setArrayLength] = useState<number>(1);
 
     const handleClick = (index: number) => {
@@ -20,15 +20,11 @@ export const Rating = (
     };
 
     useEffect(() => {
+        setRatingArray([1,2,3,4,5]);
         setArrayLength(rating);
     }, []);
 
-    const changeDisplayRating = (index: number) => {
-        if (!isEditable) return; //;
-        setArrayLength(index);
-    };
-
-    const handleSpace = (index: number, e: KeyboardEvent<SVGAElement>) => {
+    const handleSpace = (index: number, e: KeyboardEvent<HTMLElement>) => {
         if (e.code !== 'Space') {
             return; //
         }
@@ -37,14 +33,13 @@ export const Rating = (
 
     return (
         <div className={`rating`} {...props}>
+            arrayLength={ arrayLength }
             {ratingArray.map((r, index) => (
                 <div
                     className={`rating__item`}
                     key={r}
-                    onMouseEnter={() => changeDisplayRating(index + 1)}
-                    onMouseLeave={() => changeDisplayRating(rating)}
                     tabIndex={isEditable ? 0 : -1}
-                    onKeyDown={(e: KeyboardEvent<SVGAElement>) => isEditable && handleSpace(index + 1, e)}
+                    onKeyDown={(e: KeyboardEvent<HTMLElement>) => isEditable && handleSpace(index + 1, e)}
                 >
                     <svg
                         onClick={() => handleClick(index + 1)}

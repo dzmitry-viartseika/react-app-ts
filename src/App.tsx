@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {TheButton, Ptag, Rating} from "./components/";
+import { withLayout } from './layout/Layout';
+
 
 function App(): JSX.Element {
     const [counter, setCounter] = useState<number>(0);
@@ -18,31 +20,31 @@ function App(): JSX.Element {
 
   return (
     <div className={'App'}>
-        counter={ counter }
-        <TheButton
-            children={`primary`}
-            appearance={`primary`}
-            onClick={handleClick}
-        />
+              counter={ counter }
+              <TheButton
+                  children={`primary`}
+                  appearance={`primary`}
+                  onClick={handleClick}
+              />
 
-        <TheButton
-            children={`ghost`}
-            appearance={`ghost`}
-            arrow={`down`}
-        />
+              <TheButton
+                  children={`ghost`}
+                  appearance={`ghost`}
+                  arrow={`down`}
+              />
 
-        <Ptag
-            children={`wertey hello how are u?`}
-            size={`lg`}
-        />
+              <Ptag
+                  children={`wertey hello how are u?`}
+                  size={`lg`}
+              />
 
-        <Rating
-            setRating={setRating}
-            rating={3}
-            isEditable={true}
-        />
-    </div>
+              <Rating
+                  setRating={setRating}
+                  rating={3}
+                  isEditable={true}
+              />
+          </div>
   );
 }
 
-export default App;
+export default withLayout(App);
