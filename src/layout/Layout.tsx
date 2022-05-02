@@ -1,5 +1,6 @@
 import { LayoutProps } from './Layout.props';
 import { Header, Footer, Sidebar } from "../layout/";
+import styles from './Layout.module.scss';
 import {FunctionComponent} from "react";
 
 export const Layout = (
@@ -8,16 +9,14 @@ export const Layout = (
     }: LayoutProps
 ): JSX.Element => {
     return (
-        <>
-            <Header />
-            <div>
-               <Sidebar />
-                <main>
-                    Layout = {children}
-                </main>
-            </div>
-            <Footer />
-        </>
+        <div className={styles.wrapper}>
+            <Header className={styles.header}/>
+            <Sidebar className={styles.sidebar}/>
+            <main className={styles.body}>
+                Layout = {children}
+            </main>
+            <Footer className={styles.footer}/>
+        </div>
     );
 };
 
